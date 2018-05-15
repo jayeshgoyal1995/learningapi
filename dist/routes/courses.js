@@ -74,14 +74,14 @@ route.get('/:cid/batches/:bid/lectures', (req, res) => {
 route.post('/:cid/batches/:bid/lectures', (req, res) => {
     db_1.Lecture.create({
         name: req.body.name,
-        batchId: req.params.id
+        batchId: req.params.bid
     }).then((obj) => res.json(obj))
         .catch((err) => res.json({ error: err.message }));
 });
 route.get('/:cid/batches/:bid/students', (req, res) => {
     db_1.StudentBatch.findAll({
         where: {
-            batchId: req.params.id
+            batchId: req.params.bid
         }
     })
         .then((studentBatch) => {
@@ -102,7 +102,7 @@ route.get('/:cid/batches/:bid/students', (req, res) => {
 route.get('/:cid/batches/:bid/teachers', (req, res) => {
     db_1.TeacherBatch.findAll({
         where: {
-            batchId: req.params.id
+            batchId: req.params.bid
         }
     })
         .then((teacherBatch) => {

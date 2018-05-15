@@ -6,15 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = __importDefault(require("sequelize"));
 const Op = sequelize_1.default.Op;
 const db = new sequelize_1.default('learningdb', 'jayesh', 'jayeshgoyal', {
-    //dialect: "sqlite",
-    //storage: "./learning.db"
-    dialect: 'mysql',
-    host: 'localhost',
-    pool: {
-        max: 5,
-        min: 1,
-        idle: 1000
-    },
+    dialect: "sqlite",
+    storage: "./learning.db"
+    // dialect: 'mysql',
+    // host: 'localhost',
+    // pool: {
+    //     max: 5,
+    //     min: 1,
+    //     idle: 1000
+    // },
 });
 exports.Batch = db.define('batch', {
     name: {

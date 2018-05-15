@@ -26,7 +26,8 @@ route.post('/', (req, res) => {
 });
 route.put('/:id', (req, res) => {
     db_1.Student.update({
-        name: req.body.name,
+        name: req.body.name
+    }, {
         where: {
             id: req.params.id
         }

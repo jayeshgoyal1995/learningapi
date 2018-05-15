@@ -9,15 +9,15 @@ import { TeacherClass } from './classes/teacher'
 const Op = Sequelize.Op;
 
 const db = new Sequelize('learningdb', 'jayesh', 'jayeshgoyal', {
-    //dialect: "sqlite",
-    //storage: "./learning.db"
-    dialect: 'mysql',
-    host: 'localhost',
-    pool: {
-        max: 5,
-        min: 1,
-        idle: 1000
-    },
+    dialect: "sqlite",
+    storage: "./learning.db"
+    // dialect: 'mysql',
+    // host: 'localhost',
+    // pool: {
+    //     max: 5,
+    //     min: 1,
+    //     idle: 1000
+    // },
 })
 
 export const Batch = db.define<BatchClass, any>('batch', {
