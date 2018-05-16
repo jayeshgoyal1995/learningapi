@@ -96,7 +96,7 @@ Lecture.belongsTo(Batch)
 Batch.hasMany(Lecture)
 
 Lecture.belongsTo(Subject);
-Subject.hasOne(Lecture);
+Subject.hasMany(Lecture);
 
 db.sync();
 
