@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {Batch, Course, Lecture, Student, StudentBatch, Teacher, TeacherBatch} from '../db'
+import {Batch, Course, Lecture, Student, StudentBatch, Subject, Teacher, TeacherBatch} from '../db'
 
 const route: Router = Router();
 
@@ -74,6 +74,9 @@ route.delete('/:cid/batches/:bid', (req: any, res: any)=>{
 route.get('/:cid/batches/:bid/lectures', (req: any, res: any)=>{
     Lecture.findAll({
         attributes: ['id', 'name'],
+        include: [{
+            model: Subject
+        }], 
         where: {
             batchId: req.params.bid,
         }
@@ -84,7 +87,8 @@ route.get('/:cid/batches/:bid/lectures', (req: any, res: any)=>{
 route.post('/:cid/batches/:bid/lectures', (req: any, res: any)=>{
     Lecture.create({
         name: req.body.name,
-        batchId: req.params.bid
+        batchId: req.params.bid,
+        subjectId: req.body.subjectId
     }).then((obj)=> res.json(obj))
     .catch((err)=> res.json({error: err.message}))
 })
