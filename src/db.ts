@@ -8,7 +8,7 @@ import { TeacherClass } from './classes/teacher'
 
 const Op = Sequelize.Op;
 
-const db = new Sequelize('learningdb', 'jayesh', 'jayeshgoyal', {
+const db = new Sequelize({
     dialect: "sqlite",
     storage: "./learning.db"
     // dialect: 'mysql',
@@ -94,6 +94,9 @@ Subject.hasMany(Teacher);
 
 Lecture.belongsTo(Batch)
 Batch.hasMany(Lecture)
+
+Lecture.belongsTo(Subject);
+Subject.hasOne(Lecture);
 
 db.sync();
 

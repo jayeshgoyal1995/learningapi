@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = __importDefault(require("sequelize"));
 const Op = sequelize_1.default.Op;
-const db = new sequelize_1.default('learningdb', 'jayesh', 'jayeshgoyal', {
+const db = new sequelize_1.default({
     dialect: "sqlite",
     storage: "./learning.db"
     // dialect: 'mysql',
@@ -76,4 +76,6 @@ exports.Teacher.belongsTo(exports.Subject);
 exports.Subject.hasMany(exports.Teacher);
 exports.Lecture.belongsTo(exports.Batch);
 exports.Batch.hasMany(exports.Lecture);
+exports.Lecture.belongsTo(exports.Subject);
+exports.Subject.hasOne(exports.Lecture);
 db.sync();

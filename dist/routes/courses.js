@@ -6,16 +6,16 @@ const route = express_1.Router();
 route.get('/', (req, res) => {
     db_1.Course.findAll({
         attributes: ["id", "name"]
-    }).then((list) => res.json({ courseList: list }))
+    }).then((list) => res.json(list))
         .catch((err) => res.json({ error: err.message }));
 });
 route.get('/:id', (req, res) => {
-    db_1.Course.findAll({
+    db_1.Course.findOne({
         attributes: ["id", "name"],
         where: {
             id: req.params.id
         }
-    }).then((course) => res.json({ course: course }))
+    }).then((course) => res.json(course))
         .catch((err) => res.json({ error: err.message }));
 });
 route.post('/', (req, res) => {
@@ -33,7 +33,7 @@ route.get('/:id/batches', (req, res) => {
         where: {
             courseId: req.params.id
         }
-    }).then((list) => res.json({ batchList: list }))
+    }).then((list) => res.json(list))
         .catch((err) => res.json({ error: err.message }));
 });
 route.post('/:id/batches', (req, res) => {
@@ -50,7 +50,7 @@ route.get('/:cid/batches/:bid', (req, res) => {
             courseId: req.params.cid,
             id: req.params.bid
         }
-    }).then((list) => res.json({ batchList: list }))
+    }).then((obj) => res.json(obj))
         .catch((err) => res.json({ error: err.message }));
 });
 route.delete('/:cid/batches/:bid', (req, res) => {
@@ -59,7 +59,7 @@ route.delete('/:cid/batches/:bid', (req, res) => {
             courseId: req.params.cid,
             id: req.params.bid
         }
-    }).then((list) => res.json({ batchList: list }))
+    }).then((rows) => res.json(rows))
         .catch((err) => res.json({ error: err.message }));
 });
 route.get('/:cid/batches/:bid/lectures', (req, res) => {
@@ -68,7 +68,7 @@ route.get('/:cid/batches/:bid/lectures', (req, res) => {
         where: {
             batchId: req.params.bid,
         }
-    }).then((list) => res.json({ lectureList: list }))
+    }).then((list) => res.json(list))
         .catch((err) => res.json({ error: err.message }));
 });
 route.post('/:cid/batches/:bid/lectures', (req, res) => {
@@ -95,7 +95,7 @@ route.get('/:cid/batches/:bid/students', (req, res) => {
                 id: { $in: batchIdArray }
             }
         })
-            .then((list) => res.json({ batchList: list }))
+            .then((list) => res.json(list))
             .catch((err) => res.json({ error: err.message }));
     });
 });
@@ -116,7 +116,7 @@ route.get('/:cid/batches/:bid/teachers', (req, res) => {
                 id: { $in: batchIdArray }
             }
         })
-            .then((list) => res.json({ batchList: list }))
+            .then((list) => res.json(list))
             .catch((err) => res.json({ error: err.message }));
     });
 });

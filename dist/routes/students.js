@@ -6,16 +6,16 @@ const route = express_1.Router();
 route.get('/', (req, res) => {
     db_1.Student.findAll({
         attributes: ["id", "name"]
-    }).then((list) => res.json({ studentList: list }))
+    }).then((list) => res.json(list))
         .catch((err) => res.json({ error: err.message }));
 });
 route.get('/:id', (req, res) => {
-    db_1.Student.findAll({
+    db_1.Student.findOne({
         attributes: ["id", "name"],
         where: {
             id: req.params.id
         }
-    }).then((student) => res.json({ student: student }))
+    }).then((student) => res.json(student))
         .catch((err) => res.json({ error: err.message }));
 });
 route.post('/', (req, res) => {
@@ -31,7 +31,7 @@ route.put('/:id', (req, res) => {
         where: {
             id: req.params.id
         }
-    }).then((row) => res.json({ row: row }))
+    }).then((rows) => res.json(rows))
         .catch((err) => res.json({ error: err.message }));
 });
 route.delete('/:id', (req, res) => {
@@ -39,27 +39,9 @@ route.delete('/:id', (req, res) => {
         where: {
             id: req.params.id
         }
-    }).then((row) => res.json({ row: row }))
+    }).then((rows) => res.json(rows))
         .catch((err) => res.json({ error: err.message }));
 });
-// route.post('/:id/batches', (req, res)=>{
-// Student.create({
-//     id: req.params.id,
-//     name: req.body.name,
-//     batches: [{id: req.body.batch}]
-// }, {include: [Batch]
-// }).then((obj)=> res.json(obj))
-// .catch((err)=> res.json({error: err.message}))
-// })
-// route.get('/:id/batches', (req: any, res: any)=>{
-//     Student.find({
-//         where: { 
-//             id: req.params.id 
-//         },
-//         include: [{ all: true}]
-//       }).then((list)=> res.json({batchList: list}))
-//       .catch((err)=> res.json({error: err.message}))
-// })
 route.get('/:id/batches', (req, res) => {
     db_1.StudentBatch.findAll({
         where: {
@@ -77,7 +59,7 @@ route.get('/:id/batches', (req, res) => {
                 id: { $in: batchIdArray }
             }
         })
-            .then((list) => res.json({ batchList: list }))
+            .then((list) => res.json(list))
             .catch((err) => res.json({ error: err.message }));
     });
 });

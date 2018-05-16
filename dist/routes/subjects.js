@@ -6,16 +6,16 @@ const route = express_1.Router();
 route.get('/', (req, res) => {
     db_1.Subject.findAll({
         attributes: ["id", "name"]
-    }).then((list) => res.json({ subjectList: list }))
+    }).then((list) => res.json(list))
         .catch((err) => res.json({ error: err.message }));
 });
 route.get('/:id', (req, res) => {
-    db_1.Subject.findAll({
+    db_1.Subject.findOne({
         attributes: ["id", "name"],
         where: {
             id: req.params.id
         }
-    }).then((subject) => res.json({ subject: subject }))
+    }).then((subject) => res.json(subject))
         .catch((err) => res.json({ error: err.message }));
 });
 route.post('/', (req, res) => {
@@ -31,7 +31,7 @@ route.put('/:id', (req, res) => {
         where: {
             id: req.params.id
         }
-    }).then((row) => res.json({ row: row }))
+    }).then((row) => res.json(row))
         .catch((err) => res.json({ error: err.message }));
 });
 route.delete('/:id', (req, res) => {
@@ -39,7 +39,7 @@ route.delete('/:id', (req, res) => {
         where: {
             id: req.params.id
         }
-    }).then((row) => res.json({ row: row }))
+    }).then((row) => res.json(row))
         .catch((err) => res.json({ error: err.message }));
 });
 route.get('/:id/teachers', (req, res) => {
@@ -48,7 +48,7 @@ route.get('/:id/teachers', (req, res) => {
         where: {
             subjectId: req.params.id
         }
-    }).then((list) => res.json({ teacherList: list }))
+    }).then((list) => res.json(list))
         .catch((err) => res.json({ error: err.message }));
 });
 route.post('/:id/teachers', (req, res) => {

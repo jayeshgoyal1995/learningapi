@@ -5,7 +5,7 @@ const route: Router = Router();
 route.get('/', (req: any, res: any)=>{
     Teacher.findAll({
         attributes: ["id", "name"]
-    }).then((list)=> res.json({teacherList: list}))
+    }).then((list)=> res.json(list))
     .catch((err)=> res.json({error: err.message}))
     
 });
@@ -23,7 +23,7 @@ route.get('/:id', (req: any, res: any)=>{
         where: {
             id: req.params.id
         }
-    }).then((teacher)=> res.json({teacher: teacher}))
+    }).then((teacher)=> res.json(teacher))
     .catch((err)=> res.json({error: err.message}))
     
 });
@@ -35,7 +35,7 @@ route.put('/:id', (req: any, res: any)=>{
         where: {
             id: req.params.id
         }
-    }).then((row)=> res.json({row: row}))
+    }).then((row)=> res.json(row))
     .catch((err)=> res.json({error: err.message}))
 });
 
@@ -44,7 +44,7 @@ route.delete('/:id', (req: any, res: any)=>{
         where: {
             id: req.params.id
         }
-    }).then((row)=> res.json({row: row}))
+    }).then((row)=> res.json(row))
     .catch((err)=> res.json({error: err.message}))
 })
 
@@ -65,7 +65,7 @@ route.get('/:id/batches', (req, res)  =>  {
                 id: { $in: batchIdArray }
             }
         })
-        .then((list) => res.json({batchList: list}))
+        .then((list) => res.json(list))
         .catch((err)=> res.json({error: err.message}))
     })
 })

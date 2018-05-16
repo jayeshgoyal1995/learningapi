@@ -6,18 +6,18 @@ const route: Router = Router();
 route.get('/', (req: any, res: any)=>{
     Course.findAll({
         attributes: ["id", "name"]
-    }).then((list)=> res.json({courseList: list}))
+    }).then((list)=> res.json(list))
     .catch((err)=> res.json({error: err.message}))
     
 });
 
 route.get('/:id', (req: any, res: any)=>{
-    Course.findAll({
+    Course.findOne({
         attributes: ["id", "name"],
         where: {
             id: req.params.id
         }
-    }).then((course)=> res.json({course: course}))
+    }).then((course)=> res.json(course))
     .catch((err)=> res.json({error: err.message}))
     
 });
@@ -38,7 +38,7 @@ route.get('/:id/batches', (req: any, res: any)=>{
         where: {
             courseId: req.params.id
         }
-    }).then((list)=> res.json({batchList: list}))
+    }).then((list)=> res.json(list))
     .catch((err)=> res.json({error: err.message}))
 })
 
@@ -57,7 +57,7 @@ route.get('/:cid/batches/:bid', (req: any, res: any)=>{
             courseId: req.params.cid,
             id: req.params.bid
         }
-    }).then((list)=> res.json({batchList: list}))
+    }).then((obj)=> res.json(obj))
     .catch((err)=> res.json({error: err.message}))
 })
 
@@ -67,7 +67,7 @@ route.delete('/:cid/batches/:bid', (req: any, res: any)=>{
             courseId: req.params.cid,
             id: req.params.bid
         }
-    }).then((list)=> res.json({batchList: list}))
+    }).then((rows)=> res.json(rows))
     .catch((err)=> res.json({error: err.message}))
 })
 
@@ -77,7 +77,7 @@ route.get('/:cid/batches/:bid/lectures', (req: any, res: any)=>{
         where: {
             batchId: req.params.bid,
         }
-    }).then((list)=> res.json({lectureList: list}))
+    }).then((list)=> res.json(list))
     .catch((err)=> res.json({error: err.message}))
 })
 
@@ -106,7 +106,7 @@ route.get('/:cid/batches/:bid/students', (req: any, res: any)=>{
                 id: { $in: batchIdArray }
             }
         })
-        .then((list) => res.json({batchList: list}))
+        .then((list) => res.json(list))
         .catch((err)=> res.json({error: err.message}))
     })
 })
@@ -128,7 +128,7 @@ route.get('/:cid/batches/:bid/teachers', (req: any, res: any)=>{
                 id: { $in: batchIdArray }
             }
         })
-        .then((list) => res.json({batchList: list}))
+        .then((list) => res.json(list))
         .catch((err)=> res.json({error: err.message}))
     })
 })
